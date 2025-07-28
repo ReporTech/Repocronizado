@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" class="light dark">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Modifica - Repocronizado</title>
+
+  <script src="js/registraServiceWorker.js"></script>
+
+  <meta name="viewport" content="width=device-width">
+  <meta name="theme-color" content="#fffbfe">
+  <link rel="icon" sizes="48x48" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+  <script src="ungap/custom-elements.js"></script>
+
+  <script type="module" src="js/configura.js"></script>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/transicion_pestanas.css">
+  <script type="module" src="lib/js/consumeJson.js"></script>
+  <script type="module" src="lib/js/muestraObjeto.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="js/bd/playeraBusca.js"></script>
+  <script type="module" src="js/bd/playeraElimina.js"></script>
+  <script type="module" src="js/bd/playeraModifica.js"></script>
+  <script>
+
+    // Obtiene los parámetros de la página.
+    const parametros = new URL(location.href).searchParams
+
+    const paramId = parametros.get("id")
+
+  </script>
+
+</head>
+
+<body onload="if (paramId !== null) {
+   playeraBusca(paramId)
+    .then(playera => {
+     if (playera === undefined) throw new Error('playera no encontrado.')
+     muestraObjeto(forma, {
+              nombre: { value: playera.PLA_NOM },
+              talla: { value: playera.PLA_TALLA },
+              tela: { value: playera.PLA_TELA },
+              color: { value: playera.PLA_COLOR }
+            });
+          })
+    .catch(muestraError)
+  }">
+
+
+
+  <form id="forma" onsubmit="
+   event.preventDefault()
+   if (paramId !== null) {
+    const PLA_ID = paramId
+    // Lee el nombre, quitándole los espacios al inicio y al final.
+    const PLA_NOM = forma.nombre.value.trim()
+    const PLA_TALLA = forma.talla.value.trim()
+    const PLA_TELA = forma.tela.value.trim()
+    const PLA_COLOR = forma.color.value.trim()
+    const modelo = { PLA_ID, PLA_NOM, PLA_TALLA, PLA_TELA, PLA_COLOR }
+    playeraModifica(modelo)
+     .then(json => location.href = 'index.html')
+     .catch(muestraError)
+   }">
+
+    <md-top-app-bar adicional="tab" headline="headline">
+
+      <a href="index.html">
+        <button class="md-standard-icon-button" type="button" title="Cancelar" slot="navigation">
+          <span class="material-symbols-outlined">cancel</span>
+        </button>
+      </a>
+      <button class="md-standard-icon-button" type="submit" title="Guardar" slot="action">
+        <span class="material-symbols-outlined">save</span>
+      </button>
+
+      <button is="md-overflow-button" slot="action" onclick="overflow.alterna(this)"></button>
+
+    </md-top-app-bar>
+    <h1 id="headline">Modificar datos</h1>
+    <nav-tab-fixed id="tab"></nav-tab-fixed>
+
+
+    <main>
+      <input name="id" type="hidden">
+
+      <p>
+        <label class="md-filled-text-field">
+          <input required value="Cargando&hellip;" name="nombre">
+          <span>Modelo de la playera *</span>
+          <small>Obligatorio</small>
+        </label>
+      </p>
+      <p>
+        <label class="md-filled-text-field">
+          <input required value="Cargando&hellip;" name="talla">
+          <span>Talla de la playera *</span>
+          <small>Obligatorio</small>
+        </label>
+      </p>
+      <p>
+        <label class="md-filled-text-field">
+          <input required value="Cargando&hellip;" name="tela">
+          <span>Tela de la playera *</span>
+          <small>Obligatorio</small>
+        </label>
+      </p>
+      <p>
+        <label class="md-filled-text-field">
+          <input required value="Cargando&hellip;" name="color">
+          <span>Color de la playera *</span>
+          <small>Obligatorio</small>
+        </label>
+      </p>
+    </main>
+  </form>
+ 
+  <md-overflow-menu id="overflow">
+
+    <button type="button" onclick="
+    if (paramId !== null && confirm('Confirma la eliminación')) {
+     playeraElimina(paramId)
+      .then(() => location.href = 'index.html')
+      .catch(muestraError)
+    }">
+      <span class="material-symbols-outlined"> delete</span> Eliminar
+    </button>
+
+  </md-overflow-menu>
+  <nav-drw></nav-drw>
+</body>
+
+</html>
