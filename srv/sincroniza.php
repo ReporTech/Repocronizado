@@ -6,7 +6,7 @@ require_once __DIR__ . "/../lib/php/devuelveJson.php";
 require_once __DIR__ . "/../lib/php/ProblemDetails.php";
 require_once __DIR__ . "/../lib/php/devuelveProblemDetails.php";
 require_once __DIR__ . "/../lib/php/devuelveErrorInterno.php";
-require_once __DIR__ . "/modelo/TABLA_PASATIEMPO.php";
+require_once __DIR__ . "/modelo/TABLA_PLAYERA.php";
 require_once __DIR__ . "/modelo/validaPlayera.php";
 require_once __DIR__ . "/bd/playeraAgrega.php";
 require_once __DIR__ . "/bd/playeraBusca.php";
