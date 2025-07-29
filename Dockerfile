@@ -17,7 +17,6 @@ COPY . /var/www/html/
 # Permisos
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-=======
 # Dockerfile
 FROM php:8.2-apache 
 
