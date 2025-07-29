@@ -14,7 +14,7 @@ export async function playeraAgrega(modelo) {
  // Genera id único en internet.
  modelo.PLA_ID = creaIdCliente(Date.now().toString())
  return bdEjecuta(Bd, [ALMACEN_PLAYERA], transaccion => {
-  const almacenAlumno = transaccion.objectStore(ALMACEN_PLAYERA)
+  const almacenPlayera = transaccion.objectStore(ALMACEN_PLAYERA)
   almacenPlayera.add(modelo)
  })
 }

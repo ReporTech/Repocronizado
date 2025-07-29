@@ -11,7 +11,7 @@ export async function playeraElimina(id) {
  if (modelo !== undefined) {
   modelo.PLA_MODIFICACION = Date.now()
   modelo.PLA_ELIMINADO = 1
-  return bdEjecuta(Bd, [ALMACEN_ALUMNO], transaccion => {
+  return bdEjecuta(Bd, [ALMACEN_PLAYERA], transaccion => {
    const almacenPlayera = transaccion.objectStore(ALMACEN_PLAYERA)
    almacenPlayera.put(modelo)
   })

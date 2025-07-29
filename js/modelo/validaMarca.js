@@ -3,7 +3,7 @@
  */
 export function validaMarca(marca) {
  if (typeof marca !== "string" || marca.trim() === "")
-  throw new Error("Falta el nombre.")
+  throw new Error("Falta la marca.")
 }
 
 /**

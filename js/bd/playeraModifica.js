@@ -6,9 +6,9 @@ import { ALMACEN_PLAYERA, Bd } from "./Bd.js"
 import { playeraBusca } from "./playeraBusca.js"
 
 /**
- * @param { import("../modelo/PLAYERA.js").ALUMNO } modelo
+ * @param { import("../modelo/PLAYERA.js").PLAYERA } modelo
  */
-export async function alumnoModifica(modelo) {
+export async function playeraModifica(modelo) {
  validaMarca(modelo.PLA_MARCA)
  if (modelo.PLA_ID === undefined)
   throw new Error(`Falta PLA_ID de ${modelo.PLA_MARCA}.`)
