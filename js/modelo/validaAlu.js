@@ -11,10 +11,10 @@ export function validaAlumno(objeto) {
     throw new Error("El nombre debe ser texto y no puede estar vacío.")
 
   if (typeof objeto.ALU_ASIGNATURA !== "string" || objeto.ALU_ASIGNATURA === "")
-    throw new Error("La asignatura debe ser texto y no puede estar vacía.")
+    throw new Error("La matricula debe ser texto y no puede estar vacía.")
 
   if (typeof objeto.ALU_TURNO !== "string" || objeto.ALU_TURNO === "")
-    throw new Error("El turno debe ser texto y no puede estar vacío.")
+    throw new Error("El grupo debe ser texto y no puede estar vacío.")
 
   if (typeof objeto.ALU_MODIFICACION !== "number")
     throw new Error("El campo modificacion debe ser número.")

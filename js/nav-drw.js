@@ -11,8 +11,8 @@ export class NavDrw extends MdNavigationDrawer {
    <h1>PWA con MD</h1>
 
    <a ${resaltaSiEstasEn(["/index.html", "", "/"])} href="index.html">
-    <span class="material-symbols-outlined">home</span>
-    Inicio
+    <span class="material-symbols-outlined">boy</span>
+    Alumnos
    </a>
 
    <a ${resaltaSiEstasEn(["/secundaria.html"])} href="secundaria.html">

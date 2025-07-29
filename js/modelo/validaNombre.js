@@ -11,7 +11,7 @@ export function validaNombre(nombre) {
  */
 export function validaAsignatura(asignatura) {
  if (typeof asignatura !== "string" || asignatura.trim() === "")
-  throw new Error("Falta la asignatura.")
+  throw new Error("Falta la matricula.")
 }
 
 /**
@@ -19,5 +19,5 @@ export function validaAsignatura(asignatura) {
  */
 export function validaTurno(turno) {
  if (typeof turno !== "string" || turno.trim() === "")
-  throw new Error("Falta el turno.")
+  throw new Error("Falta el grupo.")
 }

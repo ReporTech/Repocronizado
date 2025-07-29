@@ -3,7 +3,7 @@ import { exportaAHtml } from "../../lib/js/exportaAHtml.js"
 import { validaId } from "../modelo/validaId.js"
 import { validaNombre } from "../modelo/validaNombre.js"
 import { ALMACEN_ALUMNO, Bd } from "./Bd.js"
-import { alumnoBusca } from "./AlumnoBusca.js"
+import { alumnoBusca } from "./alumnoBusca.js"
 
 /**
  * @param { import("../modelo/ALUMNO.js").ALUMNO } modelo

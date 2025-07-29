@@ -1,7 +1,7 @@
 import { bdEjecuta } from "../../lib/js/bdEjecuta.js"
 import { exportaAHtml } from "../../lib/js/exportaAHtml.js"
 import { ALMACEN_ALUMNO, Bd } from "./Bd.js"
-import { alumnoBusca } from "./AlumnoBusca.js"
+import { alumnoBusca } from "./alumnoBusca.js"
 
 /**
  * @param { string } id
