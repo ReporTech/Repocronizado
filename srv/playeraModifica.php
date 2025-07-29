@@ -16,7 +16,7 @@ require_once __DIR__ . "/modelo/validaId.php";
  *   PLA_ELIMINADO: int
  *  } $modelo
  */
-function alumnoModifica(array $modelo)
+function playeraModifica(array $modelo)
 {
  validaId($modelo[PLA_ID]);
  validaNombre($modelo[PLA_MARCA]);

@@ -14,7 +14,7 @@ require_once __DIR__ . "/modelo/TABLA_PLAYERAS.php";
  *   PLA_ELIMINADO: int
  *  }
  */
-function alumnoBusca(string $id): false|array
+function playeraBusca(string $id): false|array
 {
  return selectFirst(
   pdo: Bd::pdo(),
