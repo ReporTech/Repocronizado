@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 FROM php:8.1-apache
 
 # Actualiza repos y paquetes esenciales para compilación + sqlite dev
@@ -27,5 +27,5 @@ WORKDIR /var/www/html
 COPY . .
 
 # Exponer el puerto
->>>>>>> e93e886da6fcf034a91b530ec7c9304cc2855667
+
 EXPOSE 80
