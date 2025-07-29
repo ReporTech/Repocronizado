@@ -74,38 +74,9 @@
   <md-top-app-bar>
     <center><h1>Modificar Alumno</h1></center>
   </md-top-app-bar>
-  <nav-tab-fixed id="tab"></nav-tab-fixed>
 
   <main>
-    <p>
-      <md-top-app-bar adicional="tab" headline="headline">
-
-      <a href="index.html">
-        <button class="md-standard-icon-button" type="button" title="Cancelar" slot="navigation">
-          <span class="material-symbols-outlined">cancel</span>
-        </button>
-      </a>
-      <button class="md-standard-icon-button" type="submit" title="Guardar" slot="action">
-        <span class="material-symbols-outlined">save</span>
-      </button>
-
-      <button is="md-overflow-button" slot="action" onclick="overflow.alterna(this)"></button>
-
-    </md-top-app-bar>
-
-      <md-overflow-menu id="overflow">
-
-    <button type="button" onclick="
-    if (paramId !== null && confirm('Confirma la eliminación')) {
-     playeraElimina(paramId)
-      .then(() => location.href = 'index.html')
-      .catch(muestraError)
-    }">
-      <span class="material-symbols-outlined"> delete</span> Eliminar
-    </button>
-
-  </md-overflow-menu>
-    </p>
+    
 
     <input name="id" type="hidden">
 
@@ -119,25 +90,45 @@
     </p>
 
     <p>
-      <p>Materia</p>
+      <p>Matricula</p>
       <label class="md-filled-text-field">
-        <input required placeholder="Materia*" name="materia">
-        <span>Materia *</span>
+        <input required placeholder="Matricula*" name="materia">
+        <span>Matricula *</span>
         <small>Obligatorio</small>
       </label>
     </p>
 
     <p>
-      <p>Turno</p>
+      <p>Grupo</p>
       <label class="md-filled-text-field">
-        <input required placeholder="Turno*" name="turno">
-        <span>Turno *</span>
+        <input required placeholder="Grupo*" name="turno">
+        <span>Grupo *</span>
         <small>Obligatorio</small>
       </label>
     </p>
+    <p>
+      <button class="md-filled-button" type="button" onclick="location.href='index.html'">
+        <span class="material-symbols-outlined" style="vertical-align: middle;">cancel</span>
+        <span style="vertical-align: middle;">Cancelar</span>
+      </button>
+
+      <button class="md-filled-button" type="submit">
+        <span class="material-symbols-outlined" style="vertical-align: middle;">save</span>
+        <span style="vertical-align: middle;">Guardar</span>
+      </button>
+
+      <button class="md-filled-button" type="button" onclick="
+        if (paramId !== null && confirm('Confirma la eliminación')) {
+          alumnoElimina(paramId)
+            .then(() => location.href = 'index.html')
+            .catch(muestraError)
+        }">
+        <span class="material-symbols-outlined" style="vertical-align: middle;">delete</span>
+        <span style="vertical-align: middle;">Borrar</span>
+      </button>
+    </p>
 
   </main>
-  <nav-drw></nav-drw>
 
 </form>
 </body>

@@ -1,10 +1,10 @@
 import { enviaJson } from "../lib/js/enviaJson.js"
 import { exportaAHtml } from "../lib/js/exportaAHtml.js"
 import { muestraError } from "../lib/js/muestraError.js"
-import { playeraConsultaTodos } from "./bd/playeraConsultaTodos.js"
-import { playeraReemplaza } from "./bd/playeraReemplaza.js"
+import { alumnoConsultaTodos } from "./bd/alumnoConsultaTodos.js"
+import { alumnosReemplaza } from "./bd/alumnoReemplaza.js"
 import { esperaUnPocoYSincroniza } from "./esperaUnPocoYSincroniza.js"
-import { validaPlayera } from "./modelo/validaPlayeras.js"
+import { validaAlumnos } from "./modelo/validaAlumnos.js"
 import { renderiza } from "./renderiza.js"
 
 /**
@@ -13,11 +13,11 @@ import { renderiza } from "./renderiza.js"
 export async function sincroniza(lista) {
  try {
   if (navigator.onLine) {
-   const todos = await playeraConsultaTodos()
+   const todos = await alumnoConsultaTodos()
    const respuesta = await enviaJson("srv/sincroniza.php", todos)
-   const playeras = validaPlayera(respuesta.body)
-   await playeraReemplaza(playeras)
-   renderiza(lista, playeras)
+   const alumnos = validaAlumnos(respuesta.body)
+   await alumnosReemplaza(alumnos)
+   renderiza(lista, alumnos)
   }
  } catch (error) {
   muestraError(error)

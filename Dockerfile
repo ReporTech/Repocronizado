@@ -1,4 +1,3 @@
-
 FROM php:8.1-apache
 
 # Actualiza repos y paquetes esenciales para compilación + sqlite dev
@@ -16,15 +15,5 @@ COPY . /var/www/html/
 
 # Permisos
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
-
-# Dockerfile
-FROM php:8.2-apache 
-
-WORKDIR /var/www/html
-
-# Copia TODOS tus archivos de proyecto desde la raíz de tu repositorio
-COPY . .
-
-# Exponer el puerto
 
 EXPOSE 80

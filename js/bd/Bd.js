@@ -1,7 +1,7 @@
-export const ALMACEN_PLAYERA = "PLAYERAS"
-export const PLA_ID = "PLA_ID"
-export const INDICE_MARCA = "INDICE_MARCA"
-export const PLA_MARCA = "PLA_MARCA"
+export const ALMACEN_ALUMNO = "ALUMNOS"
+export const ALU_ID = "ALU_ID"
+export const INDICE_NOMBRE = "INDICE_NOMBRE"
+export const ALU_NOMBRE = "ALU_NOMBRE"
 const BD_NOMBRE = "sincronizacion"
 const BD_VERSION = 1
 
@@ -24,16 +24,16 @@ export const Bd = new Promise((resolve, reject) => {
   const bd = solicitud.result
 
   // Como hay cambio de versión, borra el almacén si es que existe.
-  if (bd.objectStoreNames.contains(ALMACEN_PLAYERA)) {
-   bd.deleteObjectStore(ALMACEN_PLAYERA)
+  if (bd.objectStoreNames.contains(ALMACEN_ALUMNO)) {
+   bd.deleteObjectStore(ALMACEN_ALUMNO)
   }
 
   // Crea el almacén "ALUMNOS" con el campo llave "ALU_ID".
-  const almacenPlayera =
-   bd.createObjectStore(ALMACEN_PLAYERA, { keyPath: PLA_ID })
+  const almacenAlumno =
+   bd.createObjectStore(ALMACEN_ALUMNO, { keyPath: ALU_ID })
 
   // Crea un índice ordenado por el campo "ALU_NOMBRE" que no acepta duplicados.
-  almacenPlayera.createIndex(INDICE_MARCA, PLA_MARCA)
+  almacenAlumno.createIndex(INDICE_NOMBRE, ALU_NOMBRE)
  }
 
 })
