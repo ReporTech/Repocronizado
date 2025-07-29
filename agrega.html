@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" class="light dark">
+<html lang="es">
 
 <head>
+
   <meta charset="UTF-8">
-  <title>Agregar - Repocronizado</title>
+  <meta name="viewport" content="width=device-width">
+
+  <title>Agregar - Sincronización</title>
 
   <script src="js/registraServiceWorker.js"></script>
 
@@ -12,31 +15,48 @@
   <link rel="icon" sizes="48x48" href="favicon.ico">
   <link rel="manifest" href="site.webmanifest">
   <script src="ungap/custom-elements.js"></script>
+
   <script type="module" src="js/configura.js"></script>
   <link rel="stylesheet" href="css/estilos.css">
   <link rel="stylesheet" href="css/transicion_pestanas.css">
-  <script type="module" src="lib/js/submitForm.js"></script>
+
+  <link rel="stylesheet" href="css/dark-hc.css">
+  <link rel="stylesheet" href="css/dark-mc.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/light-hc.css">
+  <link rel="stylesheet" href="css/light-mc.css">
+  <link rel="stylesheet" href="css/light.css">
+
+  <script type="module" src="js/configura.js"></script>
   <script type="module" src="lib/js/muestraError.js"></script>
   <script type="module" src="js/bd/playeraAgrega.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
 
 </head>
 
 <body>
 
-  <form id="forma" onsubmit="event.preventDefault(); 
-    // Lee los datos del formulario, eliminando los espacios al principio y al final
-    const PLA_NOM = forma.nombre.value.trim();
-    const PLA_TALLA = forma.talla.value.trim();
-    const PLA_TELA = forma.tela.value.trim();
-    const PLA_COLOR = forma.color.value.trim();
-    const modelo = { PLA_NOM, PLA_TALLA, PLA_TELA, PLA_COLOR };
-    
-    // Llama a la función playeraAgrega con el objeto modelo.
-    playeraAgrega(modelo)
-      .then(json => location.href = 'index.html') // Redirige al index después de agregar
-      .catch(muestraError);">
+<form id="forma" onsubmit="
+  event.preventDefault();
+  const PLA_MARCA = forma.playera.value.trim();
+  const PLA_TALLA = forma.talla.value.trim(); // ✅ Renombrado aquí
+  const PLA_COLOR = forma.color.value.trim();
+  const modelo = { PLA_MARCA, PLA_TALLA, PLA_COLOR }; // ✅ Usado correctamente
+  alumnoAgrega(modelo)
+    .then(json => location.href = 'index.html')
+    .catch(muestraError)">
 
-    <md-top-app-bar adicional="tab" headline="headline">
+
+    <md-top-app-bar>
+      <center>
+        <h1>Agregar</h1>
+      </center>
+    </md-top-app-bar>
+    <nav-tab-fixed id="tab"></nav-tab-fixed>
+    
+    <main>
+      <md-top-app-bar adicional="tab" headline="headline">
       <a href="index.html">
         <button class="md-standard-icon-button" type="button" title="Cancelar" slot="navigation">
           <span class="material-symbols-outlined">cancel</span>
@@ -48,40 +68,30 @@
       </button>
     </md-top-app-bar>
 
-    <h1 id="headline">Agregar Playera</h1>
-    <nav-tab-fixed id="tab"></nav-tab-fixed>
-    
-    <main>
       <p>
-        <label class="md-filled-text-field">
-          <input required placeholder="Nombre*" name="nombre">
-          <span>Modelo de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-      <p>
-        <label class="md-filled-text-field">
-          <input required placeholder="Talla*" name="talla">
-          <span>Talla de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-      <p>
-        <label class="md-filled-text-field">
-          <input required placeholder="Tela*" name="tela">
-          <span>Tela de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-      <p>
-        <label class="md-filled-text-field">
-          <input required placeholder="Color*" name="color">
-          <span>Color de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
+      <p>Marca de la playera</p>
+      <label class="md-filled-text-field">
+        <input required placeholder="Marca*" name="marca">
+        <span>Marca *</span>
+        <small>Obligatorio</small>
+      </label>
+
+      <p>Talla</p>
+      <label class="md-filled-text-field">
+        <input required placeholder="Talla*" name="talla">
+        <span>Talla *</span>
+        <small>Obligatorio</small>
+      </label>
+
+      <p>Color</p>
+      <label class="md-filled-text-field">
+        <input required placeholder="Color*" name="color">
+        <span>Color *</span>
+        <small>Obligatorio</small>
+      </label>
       </p>
 
-      <!-- Cierra el formulario antes de cerrar main -->
+
     </main>
 
   </form>

@@ -1,5 +1,6 @@
 import { bdConsulta } from "../../lib/js/bdConsulta.js"
-import { validaPlayera } from "../modelo/validaPlayera.js"
+import { exportaAHtml } from "../../lib/js/exportaAHtml.js"
+import { validaPlayera } from "../modelo/validaPla.js"
 import { ALMACEN_PLAYERA, Bd } from "./Bd.js"
 
 /**
@@ -27,7 +28,7 @@ export async function playeraConsultaTodos() {
     const cursor = consulta.result
     if (cursor === null) {
      /* Si el cursor vale null, ya no hay más objetos que procesar; por lo
-      * mismo, se devuelve el resultado con los PLAYERAs recuperados, usando
+      * mismo, se devuelve el resultado con los alumnos recuperados, usando
       *  resolve(resultado). */
      resolve(resultado)
     } else {
@@ -43,3 +44,5 @@ export async function playeraConsultaTodos() {
   })
 
 }
+
+exportaAHtml(playeraConsultaTodos)

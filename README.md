@@ -1,1 +1,1 @@
-# Repocronizado
+# Sincronizaci-n

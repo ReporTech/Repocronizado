@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" class="light dark">
+<html lang="es">
 
 <head>
 
   <meta charset="UTF-8">
-  <title>Modifica - Repocronizado</title>
+  <meta name="viewport" content="width=device-width">
+
+  <title>Modificar - Sincronización</title>
 
   <script src="js/registraServiceWorker.js"></script>
 
@@ -17,55 +19,66 @@
   <script type="module" src="js/configura.js"></script>
   <link rel="stylesheet" href="css/estilos.css">
   <link rel="stylesheet" href="css/transicion_pestanas.css">
-  <script type="module" src="lib/js/consumeJson.js"></script>
-  <script type="module" src="lib/js/muestraObjeto.js"></script>
-  <script type="module" src="lib/js/muestraError.js"></script>
-  <script type="module" src="js/bd/playeraBusca.js"></script>
-  <script type="module" src="js/bd/playeraElimina.js"></script>
-  <script type="module" src="js/bd/playeraModifica.js"></script>
-  <script>
 
+  <link rel="stylesheet" href="css/dark-hc.css">
+  <link rel="stylesheet" href="css/dark-mc.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/light-hc.css">
+  <link rel="stylesheet" href="css/light-mc.css">
+  <link rel="stylesheet" href="css/light.css">
+
+
+  <script type="module" src="js/configura.js"></script>
+  <script type="module" src="lib/js/muestraError.js"></script>
+  <script type="module" src="lib/js/muestraObjeto.js"></script>
+  <script type="module" src="js/bd/alumnoBusca.js"></script>
+  <script type="module" src="js/bd/alumnoElimina.js"></script>
+  <script type="module" src="js/bd/alumnoModifica.js"></script>
+
+  <script>
     // Obtiene los parámetros de la página.
     const parametros = new URL(location.href).searchParams
-
     const paramId = parametros.get("id")
-
   </script>
 
 </head>
+<body onload="
+  if (paramId !== null) {
+    alumnoBusca(paramId)
+      .then(alumno => {
+        if (alumno === undefined) throw new Error('Alumno no encontrado.')
+        muestraObjeto(forma, {
+          alumno: { value: alumno.ALU_NOMBRE },
+          materia: { value: alumno.ALU_ASIGNATURA },
+          turno: { value: alumno.ALU_TURNO }
+        })
+      })
+      .catch(muestraError)
+  }
+">
 
-<body onload="if (paramId !== null) {
-   playeraBusca(paramId)
-    .then(playera => {
-     if (playera === undefined) throw new Error('playera no encontrado.')
-     muestraObjeto(forma, {
-              nombre: { value: playera.PLA_NOM },
-              talla: { value: playera.PLA_TALLA },
-              tela: { value: playera.PLA_TELA },
-              color: { value: playera.PLA_COLOR }
-            });
-          })
-    .catch(muestraError)
-  }">
+<form id="forma" onsubmit="
+  event.preventDefault()
+  if (paramId !== null) {
+    const ALU_ID = paramId
+    const ALU_NOMBRE = forma.alumno.value.trim()
+    const ALU_ASIGNATURA = forma.materia.value.trim()
+    const ALU_TURNO = forma.turno.value.trim()
+    const modelo = { ALU_ID, ALU_NOMBRE, ALU_ASIGNATURA, ALU_TURNO }
+    alumnoModifica(modelo)
+      .then(() => location.href = 'index.html')
+      .catch(muestraError)
+  }
+">
 
+  <md-top-app-bar>
+    <center><h1>Modificar Alumno</h1></center>
+  </md-top-app-bar>
+  <nav-tab-fixed id="tab"></nav-tab-fixed>
 
-
-  <form id="forma" onsubmit="
-   event.preventDefault()
-   if (paramId !== null) {
-    const PLA_ID = paramId
-    // Lee el nombre, quitándole los espacios al inicio y al final.
-    const PLA_NOM = forma.nombre.value.trim()
-    const PLA_TALLA = forma.talla.value.trim()
-    const PLA_TELA = forma.tela.value.trim()
-    const PLA_COLOR = forma.color.value.trim()
-    const modelo = { PLA_ID, PLA_NOM, PLA_TALLA, PLA_TELA, PLA_COLOR }
-    playeraModifica(modelo)
-     .then(json => location.href = 'index.html')
-     .catch(muestraError)
-   }">
-
-    <md-top-app-bar adicional="tab" headline="headline">
+  <main>
+    <p>
+      <md-top-app-bar adicional="tab" headline="headline">
 
       <a href="index.html">
         <button class="md-standard-icon-button" type="button" title="Cancelar" slot="navigation">
@@ -79,45 +92,8 @@
       <button is="md-overflow-button" slot="action" onclick="overflow.alterna(this)"></button>
 
     </md-top-app-bar>
-    <h1 id="headline">Modificar datos</h1>
-    <nav-tab-fixed id="tab"></nav-tab-fixed>
 
-
-    <main>
-      <input name="id" type="hidden">
-
-      <p>
-        <label class="md-filled-text-field">
-          <input required value="Cargando&hellip;" name="nombre">
-          <span>Modelo de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-      <p>
-        <label class="md-filled-text-field">
-          <input required value="Cargando&hellip;" name="talla">
-          <span>Talla de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-      <p>
-        <label class="md-filled-text-field">
-          <input required value="Cargando&hellip;" name="tela">
-          <span>Tela de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-      <p>
-        <label class="md-filled-text-field">
-          <input required value="Cargando&hellip;" name="color">
-          <span>Color de la playera *</span>
-          <small>Obligatorio</small>
-        </label>
-      </p>
-    </main>
-  </form>
- 
-  <md-overflow-menu id="overflow">
+      <md-overflow-menu id="overflow">
 
     <button type="button" onclick="
     if (paramId !== null && confirm('Confirma la eliminación')) {
@@ -129,7 +105,39 @@
     </button>
 
   </md-overflow-menu>
-  <nav-drw></nav-drw>
-</body>
+    </p>
 
-</html>
+    <input name="id" type="hidden">
+
+    <p>
+      <p>Nombre del alumno</p>
+      <label class="md-filled-text-field">
+        <input required placeholder="Nombre del alumno*" name="alumno">
+        <span>Nombre del alumno *</span>
+        <small>Obligatorio</small>
+      </label>
+    </p>
+
+    <p>
+      <p>Materia</p>
+      <label class="md-filled-text-field">
+        <input required placeholder="Materia*" name="materia">
+        <span>Materia *</span>
+        <small>Obligatorio</small>
+      </label>
+    </p>
+
+    <p>
+      <p>Turno</p>
+      <label class="md-filled-text-field">
+        <input required placeholder="Turno*" name="turno">
+        <span>Turno *</span>
+        <small>Obligatorio</small>
+      </label>
+    </p>
+
+  </main>
+  <nav-drw></nav-drw>
+
+</form>
+</body>

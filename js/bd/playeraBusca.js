@@ -1,6 +1,6 @@
 import { bdConsulta } from "../../lib/js/bdConsulta.js"
 import { exportaAHtml } from "../../lib/js/exportaAHtml.js"
-import { validaPlayera } from "../modelo/validaPlayera.js"
+import { validaPlayera } from "../modelo/validaPla.js"
 import { ALMACEN_PLAYERA, Bd } from "./Bd.js"
 
 /**
@@ -10,11 +10,12 @@ export async function playeraBusca(id) {
 
  return bdConsulta(Bd, [ALMACEN_PLAYERA],
   /**
-   * @param {(resultado: import("../modelo/PLAYERA.js").PLAYERA|undefined) => any} resolve 
+   * @param {(resultado: import("../modelo/PLAYERA.js").PLAYERA|undefined)
+   *                                                            => any} resolve 
    */
   (transaccion, resolve) => {
 
-   /* Pide el primer objeto de ALMACEN_PLAYERA que tenga como llave
+   /* Pide el primer objeto de ALMACEN_ALUMNO que tenga como llave
     * primaria el valor del parámetro id. */
    const consulta = transaccion.objectStore(ALMACEN_PLAYERA).get(id)
 
@@ -36,7 +37,7 @@ export async function playeraBusca(id) {
    }
 
   })
+
 }
 
-// Exporta la función de búsqueda de playera a HTML
 exportaAHtml(playeraBusca)

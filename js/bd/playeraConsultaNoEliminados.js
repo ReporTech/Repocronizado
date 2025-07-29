@@ -1,7 +1,7 @@
 import { bdConsulta } from "../../lib/js/bdConsulta.js"
 import { exportaAHtml } from "../../lib/js/exportaAHtml.js"
-import { validaPlayera } from "../modelo/validaPlayera.js"
-import { ALMACEN_PLAYERA, Bd, INDICE_NOMBRE } from "./Bd.js"
+import { validaPlayera } from "../modelo/validaPla.js"
+import { ALMACEN_PLAYERA, Bd, INDICE_MARCA } from "./Bd.js"
 
 export async function playeraConsultaNoEliminados() {
 
@@ -17,10 +17,10 @@ export async function playeraConsultaNoEliminados() {
    const almacenPlayera = transaccion.objectStore(ALMACEN_PLAYERA)
 
    // Usa el índice INDICE_NOMBRE para recuperar los datos ordenados.
-   const indiceNombre = almacenPlayera.index(INDICE_NOMBRE)
+   const indiceMarca = almacenPlayera.index(INDICE_MARCA)
 
    // Pide un cursor para recorrer cada objeto que devuelve la consulta.
-   const consulta = indiceNombre.openCursor()
+   const consulta = indiceMarca.openCursor()
 
    /* onsuccess se invoca por cada uno de los objetos de la consulta y una vez
     * cuando se acaban dichos objetos. */
@@ -30,7 +30,7 @@ export async function playeraConsultaNoEliminados() {
     const cursor = consulta.result
     if (cursor === null) {
      /* Si el cursor vale null, ya no hay más objetos que procesar; por lo
-      * mismo, se devuelve el resultado con los pasatiempos recuperados, usando
+      * mismo, se devuelve el resultado con los alumnos recuperados, usando
       *  resolve(resultado). */
      resolve(resultado)
     } else {
@@ -45,7 +45,6 @@ export async function playeraConsultaNoEliminados() {
      cursor.continue()
     }
    }
-
 
   })
 

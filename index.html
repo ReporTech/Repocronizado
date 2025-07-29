@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" class="light dark">
+<html lang="es">
 
 <head>
 
   <meta charset="UTF-8">
-  <title>Inicio - Repocronizado</title>
+  <meta name="viewport" content="width=device-width">
+
+  <title>Playeras - Repocronizacion</title>
 
   <script src="js/registraServiceWorker.js"></script>
 
@@ -17,28 +19,26 @@
   <script type="module" src="js/configura.js"></script>
   <link rel="stylesheet" href="css/estilos.css">
   <link rel="stylesheet" href="css/transicion_pestanas.css">
-  <script type="module" src="lib/js/consumeJson.js"></script>
-  <script type="module" src="lib/js/muestraObjeto.js"></script>
+
+  <link rel="stylesheet" href="css/dark-hc.css">
+  <link rel="stylesheet" href="css/dark-mc.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/light-hc.css">
+  <link rel="stylesheet" href="css/light-mc.css">
+  <link rel="stylesheet" href="css/light.css">
+
   <script type="module" src="lib/js/muestraError.js"></script>
   <script type="module" src="js/bd/playeraConsultaNoEliminados.js"></script>
   <script type="module" src="js/renderiza.js"></script>
   <script type="module" src="js/sincroniza.js"></script>
   <script type="module" src="js/esperaUnPocoYSincroniza.js"></script>
-</head>
 
-  <md-top-app-bar adicional="tab" headline="headline">
-  </md-top-app-bar>
 
-  <md-top-app-bar class="center-aligned">
-    <h1 id="headline">Playeras</h1>
-  </md-top-app-bar>
-
-  <nav-tab-fixed id="tab"></nav-tab-fixed>
-
+</head> 
 
 <body onload="playeraConsultaNoEliminados()
-   .then(playeras => {
-    renderiza(lista, playeras)
+   .then(pasatiempos => {
+    renderiza(lista, pasatiempos)
     sincroniza(lista)
    })
    .catch(error => {
@@ -46,22 +46,40 @@
     esperaUnPocoYSincroniza(lista)
    })">
 
-  <main>
 
-    <ul class="md-list" id="lista">
+  <md-top-app-bar>
+    <center>
+      <h1>Playeras</h1>
+    </center>
+  </md-top-app-bar>
+  <nav-tab-fixed id="tab"></nav-tab-fixed>
+
+
+  <main>
+    <ul class="md-list">
+      <li class="md-two-line">
+        <span>Lista de Playeras:</span>
+      </li>
+    </ul>
+
+ 
+
+  <ul class="md-list" id="lista">
       <li class="md-two-line">
         <span class="headline">Cargando&hellip;</span>
         <span class="supporting"><progress max="100">Cargando&hellip;</progress></span>
       </li>
     </ul>
 
-    <nav-drw></nav-drw>
-    <a href="agrega.html">
+     <a href="agrega.html">
       <button type="button" class="md-fab-primary" style="position: fixed; bottom: 1rem; right: 1rem;">
         <span class="material-symbols-outlined">add</span>
       </button> </a>
 
+  </main>
 
+
+ <nav-drw></nav-drw>
 </body>
 
 </html>
